@@ -38,7 +38,7 @@ import (
 type testListener struct {
 	lock              sync.RWMutex
 	resyncPeriod      time.Duration
-	expectedItemNames sets.String
+	expectedItemNames sets.Set[string]
 	receivedItemNames []string
 	name              string
 }
@@ -46,7 +46,7 @@ type testListener struct {
 func newTestListener(name string, resyncPeriod time.Duration, expected ...string) *testListener {
 	l := &testListener{
 		resyncPeriod:      resyncPeriod,
-		expectedItemNames: sets.NewString(expected...),
+		expectedItemNames: sets.New[string](expected...),
 		name:              name,
 	}
 	return l
